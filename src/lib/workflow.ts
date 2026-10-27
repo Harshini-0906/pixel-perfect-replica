@@ -152,7 +152,7 @@ export function validateTransition(app: Application, to: Stage, role: Role): str
 
 /** Simulated AI document check (rule-based, labelled as simulated). */
 export function aiVerify(doc: Doc, now = Date.now()): Doc {
-  if (!doc.fileName) return { ...doc, status: "missing", ai: undefined };
+  if (!doc.fileName) const { ai: _ai, ...rest } = doc; return { ...rest, status: "missing" };
   const notes: string[] = [];
   let confidence = 0.94;
   if (!doc.validUntil && doc.type !== "land" && doc.type !== "undertaking") {
